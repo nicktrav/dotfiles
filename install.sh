@@ -63,7 +63,7 @@ pushd $DOTFILES_DIR
   echo "with the rc files in $HOME"
 
   git checkout master
-  git reset --hard master
+  git reset --hard origin/master
   git pull
 
   rcup
