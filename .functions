@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# Tmux aliases
+tmr() {
+  tmux rename-window "$(pwd | sed -n 's/^\/Users\/nickt\/Development\/\([^\/]*\).*$/\1/p')";
+}
+
+# Development setup
+d() {
+  # Only run this if there is actually a directory with this name.
+  if [ ! -d ~/Development/"$1" ]; then
+    echo 'Project does not exist!'; return 1
+  fi
+
+  # Only create the window if it doesn't already exist.
+  if [ "$(tmux list-windows | grep "$1" > /dev/null)" -eq 0 ]; then
+    echo 'Window already exists!'; return 1
+  fi
+
+  # Set up a new window in this session, with a 70-30 vertical split with vim
+  # in the first pane. Both panes are switched into the directory.
+  tmux new-window -n "$1" -d
+  tmux split-window -t "$1" -v -p 25 -d
+  tmux send-keys -t vertica.0 "cd ~/Development/$1; clear" C-m
+  tmux send-keys -t vertica.0 "vim" C-m
+  tmux send-keys -t vertica.1 "cd ~/Development/$1; clear" C-m
+}
+
+# Resize a window for development
+rd() {
+  tmux split-window -v -p 25
+  tmux send-keys -t .1 "cd $(pwd); clear" C-m
+  clear
+  vim
+}
+
+# mans:   Search manpage given in argument '1' for term given in argument '2' (case insensitive)
+#         displays paginated result with colored search terms and two lines surrounding each hit.             Example: mans mplayer codec
+mans () {
+  man "$1" | grep -iC2 --color=always "$2" | less
+}
+
+# showa: to remind yourself of an alias (given some part of it)
+# ------------------------------------------------------------
+showa () {
+  /usr/bin/grep --color=always -i -a1 "$@" ~/Library/init/bash/aliases.bash | grep -v '^\s*$' | less -FSRXc;
+}
