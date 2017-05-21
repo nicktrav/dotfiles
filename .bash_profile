@@ -3,7 +3,7 @@
 #set -euo pipefail
 
 # Source all dotfiles
-for file in ~/.{bash_prompt,aliases,functions,docker_functions}; do
+for file in ~/.{bash_prompt,aliases,functions,docker_functions,paths}; do
   if [[ -r "$file" ]] && [[ -f "$file" ]]; then
     # shellcheck source=/dev/null
     source "$file"
