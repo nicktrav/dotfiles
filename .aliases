@@ -32,3 +32,6 @@ alias gd='git diff'
 
 # lr:  Full Recursive Directory Listing
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
+
+# Lock the screen
+alias afk='pmset displaysleepnow'
