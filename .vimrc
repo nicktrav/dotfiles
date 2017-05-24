@@ -27,6 +27,7 @@ call dein#begin(expand('~/.vim'))
   call dein#add('vimwiki/vimwiki')
   call dein#add('scrooloose/nerdtree')
   call dein#add('Shougo/unite.vim')
+  call dein#add('ngmy/vim-rubocop')
   if dein#check_install()
     call dein#install()
   endif
@@ -173,6 +174,12 @@ let g:syntastic_check_on_wq = 0
 "   Fugitive
 " -----------------------------------------------------------------------------
 set statusline+=%{fugitive#statusline()}
+
+" -----------------------------------------------------------------------------
+"   RuboCop
+" -----------------------------------------------------------------------------
+let g:vimrubocop_keymap = 0
+nmap <Leader>r :RuboCop<CR>
 
 " -----------------------------------------------------------------------------
 "   Themes and colors
