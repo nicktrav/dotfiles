@@ -148,6 +148,9 @@ let g:unite_source_menu_menus.git.command_candidates = [
   \] " Append ' --' after log to get commit info commit buffers
 nnoremap <silent> <Leader>g :Unite -direction=botright -silent -buffer-name=git -start-insert menu:git<CR>
 
+" Show hidden files by default
+let NERDTreeShowHidden=1
+
 " -----------------------------------------------------------------------------
 "   NERDTree
 " -----------------------------------------------------------------------------
