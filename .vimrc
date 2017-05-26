@@ -42,8 +42,9 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-" Closing buffers and keeping windows
-nmap <leader>c :ene<CR>:bw #<CR>
+" Close a buffer by first switching to the next buffer and then closing out
+" the buffer from which we came
+nnoremap c :bp\|bd #<CR>
 
 " Remap semicolon to colon
 nnoremap ; :
