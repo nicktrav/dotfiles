@@ -1,1 +1,8 @@
+*.iml
+.bundle
+.DS_Store
+.idea
+.rbx
+tags
 *.swp
+*.swo
