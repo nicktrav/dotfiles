@@ -27,3 +27,9 @@ export EDITOR="$VISUAL"
 # Set default blocksize for ls, df, du
 # from this: http://hints.macworld.com/comment.php?mode=view&cid=24491
 export BLOCKSIZE=1k
+
+# Local customized path and environment settings, etc.
+if [ -f ~/.bash_local ]; then
+  # shellcheck source=/dev/null
+  source ~/.bash_local
+fi
