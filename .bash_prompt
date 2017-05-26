@@ -5,7 +5,37 @@ YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
 NO_COLOUR="\[\033[0m\]"
 
+if [ -f "$HOME/.bash_local" ]; then
+  # shellcheck source=/dev/null
+  source "$HOME/.bash_local"
+fi
+
+# If we're in a large git repo, short circuit. Set the NO_GIT_PROMP
+# variable in .bash_local.
+function _should_ignore {
+  local in
+  in=0
+
+  if [ -z "$NO_GIT_PROMPT" ]; then
+    echo "$in"
+    return
+  fi
+
+  for element in "${NO_GIT_PROMPT[@]}"; do
+    if [[ "$element" == "$(pwd)" ]]; then
+      in=1
+      break
+    fi
+  done
+
+  echo $in
+}
+
 function _git_prompt() {
+  if [ "$(_should_ignore)" == "1" ]; then echo
+    return
+  fi
+
   local git_status
   git_status=$(git status -unormal 2>&1)
   # Checks to see if we're in a git repo
@@ -31,7 +61,8 @@ function _git_prompt() {
       branch=$(git describe --all --contains --abbrev=4 HEAD 2> /dev/null || echo HEAD)
     fi
     # prints out " | $branch_name"
-    echo -n '| \['"$ansi"'\]'"$branch"'\[\e[0m\] ['"$(_git_changes)"']'
+    # shellcheck disable=SC2016
+    echo -n '| \['"$ansi"'\]'"$branch"'\[\e[0m\] [$(_git_changes)]'
   fi
 }
 
@@ -49,7 +80,8 @@ local behind_symbol="↓"
 
 local unmerged_count=0 modified_count=0 has_untracked_files=0 added_count=0 is_clean=""
 
-set -- "$(git rev-list --left-right --count '@{upstream}'...HEAD 2>/dev/null)"
+# shellcheck disable=SC2046
+set -- $(git rev-list --left-right --count '@{upstream}'...HEAD 2>/dev/null)
 local behind_count=$1
 local ahead_count=$2
 
