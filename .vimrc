@@ -13,8 +13,6 @@ set runtimepath+=~/.vim/repos/github.com/Shougo/dein.vim/
 call dein#begin(expand('~/.vim'))
   let pluginsExist = 0
   call dein#add('Shougo/dein.vim')
-  call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/vimproc.vim')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('mhartington/oceanic-next')
   call dein#add('tpope/vim-fugitive')
@@ -28,6 +26,8 @@ call dein#begin(expand('~/.vim'))
   call dein#add('scrooloose/nerdtree')
   call dein#add('Shougo/unite.vim')
   call dein#add('ngmy/vim-rubocop')
+  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+  call dein#add('Shougo/unite.vim')
   if dein#check_install()
     call dein#install()
   endif
@@ -105,13 +105,32 @@ autocmd BufReadPost *
 autocmd BufRead * normal zz
 
 " -----------------------------------------------------------------------------
-"   NERDTree
+"   Unite
 " -----------------------------------------------------------------------------
 let g:unite_source_history_yank_enable=1
-let g:unite_prompt='» '
-let g:unite_source_rec_async_command =['ag', '--follow', '--nocolor', '--nogroup','--hidden', '-g', '', '--ignore', '.git', '--ignore', '*.png', '--ignore', 'lib']
+let g:unite_prompt='»'
 
-nnoremap <leader>t :Unite -auto-resize -start-insert -direction=botright file_rec/async<CR>
+" Don't skip the first line when navigating
+let g:unite_enable_auto_select = 0
+
+" Find files by name
+nnoremap <leader>t :<C-u>Unite -auto-resize -start-insert -direction=botright file_rec/async<CR>
+
+" Find files by content
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .class'
+let g:unite_source_grep_recursive_opt = ''
+nnoremap <leader>f :<C-u>Unite -auto-resize -start-insert -direction=botright grep:.<CR>
+
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Close with escape
+  nnoremap <ESC> :UniteClose<cr>
+
+  " Enable navigation with Control-j and Control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
 
 " Git
 let g:unite_source_menu_menus = {} " Useful when building interfaces at appropriate places
@@ -149,9 +168,6 @@ let g:unite_source_menu_menus.git.command_candidates = [
   \] " Append ' --' after log to get commit info commit buffers
 nnoremap <silent> <Leader>g :Unite -direction=botright -silent -buffer-name=git -start-insert menu:git<CR>
 
-" Show hidden files by default
-let NERDTreeShowHidden=1
-
 " -----------------------------------------------------------------------------
 "   NERDTree
 " -----------------------------------------------------------------------------
@@ -161,6 +177,9 @@ autocmd VimEnter * wincmd p
 
 " Allow backspace in insert mode
 :set backspace=2
+
+" Show hidden files by default
+let NERDTreeShowHidden=1
 
 " -----------------------------------------------------------------------------
 "   Syntastic
