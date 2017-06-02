@@ -117,6 +117,14 @@ local leading_whitespace=""
 [[ $is_clean -gt 0 ]]            && { printf "%s" "$leading_whitespace$clean_symbol"; leading_whitespace=" "; }
 }
 
+# Signal that the last command had a non-zero exit code.
+function _last_status() {
+  local EXIT="$?"
+  if [[ "$EXIT" != "0" ]]; then
+    echo -n "$RED!!$NO_COLOUR "
+  fi
+}
+
 _PS1="$YELLOW\u$NO_COLOUR:\w$(_git_prompt)"
 export _PS1
-export PROMPT_COMMAND='export PS1="${_PS1} $(_git_prompt)\n$ "'
+export PROMPT_COMMAND='export PS1="$(_last_status)${_PS1} $(_git_prompt)\n$ "'
