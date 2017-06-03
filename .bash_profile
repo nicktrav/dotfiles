@@ -28,6 +28,10 @@ export EDITOR="$VISUAL"
 # from this: http://hints.macworld.com/comment.php?mode=view&cid=24491
 export BLOCKSIZE=1k
 
+# Do not store duplicate commands in bash history, as well commands that start
+# with a space
+export HISTCONTROL=ignoreboth
+
 # Local customized path and environment settings, etc.
 if [ -f ~/.bash_local ]; then
   # shellcheck source=/dev/null
