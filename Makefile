@@ -1,6 +1,12 @@
-.PHONY: all dotfiles test shellcheck
+.PHONY: all dotfiles test shellcheck bin
 
-all: dotfiles
+all: dotfiles bin
+
+bin:
+	for file in $(shell find $(CURDIR)/bin -type f -not -name ".*.swp"); do \
+		f=$$(basename $$file); \
+		sudo ln -sfn $$file $(HOME)/bin/$$f; \
+	done;
 
 dotfiles:
 	# add aliases for dotfiles

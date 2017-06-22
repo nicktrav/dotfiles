@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Tidy up your git workspace by removing unused commits and branches
+
+AGGRESSIVE=0
+
+function usage () {
+  echo "usage $0: [--aggressive] "
+  echo "  Remove unused objects and refs from your local git repo"
+  echo ""
+  echo "  --aggressive: add a git gc --aggressive and other attempts to remove more junk"
+}
+
+while [[ $# -gt 0 ]] ; do
+  case $1 in
+    --aggressive)
+      AGGRESSIVE=1
+      ;;
+    --help)
+      usage
+      exit 1
+      ;;
+    *)
+      echo "unrecognized argument: $1"
+      usage
+      exit 1
+  esac
+  shift
+done
+
+set -x
+
+# Remove unused commits pulled from origin
+git remote prune origin
+
+# Remove branches that have been merged to master (except for the one you are on)
+git branch --merged master | grep -v "master" |  grep -v "\*" | grep -v "$(git rev-parse --abbrev-ref HEAD)" | xargs -n 1 git branch -d
+
+# Remove commits not pointed to by any branch locally
+if [[ "${AGGRESSIVE}" = 0 ]] ; then
+  # This is usually enough
+  git prune origin/master
+else
+  git gc --aggressive
+  git fsck --unreachable
+  git repack -a -d -l
+fi
