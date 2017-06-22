@@ -37,3 +37,5 @@ if [ -f ~/.bash_local ]; then
   # shellcheck source=/dev/null
   source ~/.bash_local
 fi
+
+export PATH=$HOME/bin:$PATH:$HOME
