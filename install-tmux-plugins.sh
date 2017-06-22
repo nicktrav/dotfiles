@@ -35,3 +35,4 @@ install_plugin vim-tmux https://github.com/tmux-plugins/vim-tmux
 install_plugin tmux-cpu https://github.com/tmux-plugins/tmux-cpu
 install_plugin tmux-battery https://github.com/tmux-plugins/tmux-battery
 install_plugin vim-tmux-navigator https://github.com/christoomey/vim-tmux-navigator
+install_plugin tmux-mem-cpu-load https://github.com/thewtex/tmux-mem-cpu-load
