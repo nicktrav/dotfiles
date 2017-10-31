@@ -32,6 +32,9 @@ export BLOCKSIZE=1k
 # with a space
 export HISTCONTROL=ignoreboth
 
+# Supercharge fzf with ripgrep
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,.pants}/*"'
+
 # Local customized path and environment settings, etc.
 if [ -f ~/.bash_local ]; then
   # shellcheck source=/dev/null

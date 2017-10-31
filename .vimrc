@@ -31,6 +31,8 @@ call dein#begin(expand('~/.vim'))
   call dein#add('Shougo/unite.vim')
   call dein#add('itchyny/lightline.vim')
   call dein#add('junegunn/goyo.vim')
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
   if dein#check_install()
     call dein#install()
   endif
@@ -39,6 +41,15 @@ call dein#end()
 " -----------------------------------------------------------------------------
 "   Mappings
 " -----------------------------------------------------------------------------
+
+" Find files with fzf
+nmap <Leader>t :Files<CR>
+nmap <Leader>b :Buffers<CR>
+
+" Search contents of files with ripgrep
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+nmap <Leader>f :Find<CR>
+
 " Distraction free editing
 nmap <Leader>G :Goyo<CR>
 
@@ -119,14 +130,10 @@ let g:unite_prompt='»'
 " Don't skip the first line when navigating
 let g:unite_enable_auto_select = 0
 
-" Find files by name
-nnoremap <leader>t :<C-u>Unite -auto-resize -start-insert -direction=botright file_rec/async<CR>
-
 " Find files by content
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .class'
 let g:unite_source_grep_recursive_opt = ''
-nnoremap <leader>f :<C-u>Unite -auto-resize -start-insert -direction=botright grep:.<CR>
 
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
