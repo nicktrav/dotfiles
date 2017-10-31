@@ -19,6 +19,9 @@ packages=(
   "git"
   "tmux"
   "vim"
+  "fzf"
+  "ag"
+  "ripgrep"
 )
 
 function install_or_update() {
@@ -27,7 +30,7 @@ function install_or_update() {
     brew upgrade "$1" || true
   else
     echo "Installing $1"
-    brew install "$1"
+    brew install "$1" || true
   fi
 }
 
