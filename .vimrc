@@ -28,6 +28,7 @@ call dein#begin(expand('~/.vim'))
   call dein#add('ngmy/vim-rubocop')
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
   call dein#add('Shougo/unite.vim')
+  call dein#add('junegunn/goyo.vim')
   if dein#check_install()
     call dein#install()
   endif
@@ -36,6 +37,9 @@ call dein#end()
 " -----------------------------------------------------------------------------
 "   Mappings
 " -----------------------------------------------------------------------------
+" Distraction free editing
+nmap <Leader>G :Goyo<CR>
+
 " Turning off arrow key - beacuse that's just lazy
 noremap <Up> <NOP>
 noremap <Down> <NOP>
