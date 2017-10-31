@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+echo "Installing reattach-to-user-namespace"
+brew install reattach-to-user-namespace
+
 echo "Creating .tmux directory"
 TMUX_DIR=~/.tmux
 mkdir -p $TMUX_DIR
