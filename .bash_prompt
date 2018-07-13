@@ -47,7 +47,6 @@ function _git_prompt() {
     elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
       local ansi=$RED
     else
-      #Just to be sure, color it red
       local ansi=$RED
     fi
 
@@ -62,7 +61,7 @@ function _git_prompt() {
     fi
     # prints out " | $branch_name"
     # shellcheck disable=SC2016
-    echo -n '| \['"$ansi"'\]'"$branch"'\[\e[0m\] [$(_git_changes)]'
+    echo -n '| '"$ansi""$branch"'\[\e[0m\] [$(_git_changes)]'
   fi
 }
 

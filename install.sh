@@ -2,51 +2,21 @@
 
 set -euo pipefail
 
-echo "---------------------------------------------------------"
-echo "Setting up brew"
-brew="/usr/local/bin/brew"
-if [ -f "$brew" ]
-then
-  echo "Homebrew is already installed!"
-else
-  echo "Homebrew is not installed, installing now ..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
+DISTRO="$1"
 
-echo "---------------------------------------------------------"
-echo "Installing packages"
-packages=(
-  "git"
-  "tmux"
-  "vim"
-  "fzf"
-  "ag"
-  "ripgrep"
-)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source "$DIR/common.sh"
 
-function install_or_update() {
-  if command -v "$1"; then
-    echo "Upgrading $1"
-    brew upgrade "$1" || true
-  else
-    echo "Installing $1"
-    brew install "$1" || true
-  fi
-}
+green "Running setup for distro $DISTRO"
+. "$DOTFILES_DIR/$DISTRO/setup.sh"
 
-for package in "${packages[@]}"
-do
-  install_or_update "$package"
-done
+green 'Installing tmux plugins'
+. "$DOTFILES_DIR/install-tmux-plugins.sh"
 
-echo "---------------------------------------------------------"
-echo "Installing tmux plugins"
-./install-tmux-plugins.sh
+green "Installing vim colors"
+mkdir -p ~/.vim/colors
+cp $DOTFILES_DIR/colors/*.vim ~/.vim/colors/
 
-# TODO
-echo "---------------------------------------------------------"
-echo "Installing IntelliJ"
-
-echo "---------------------------------------------------------"
-echo "Setting up dotfiles"
-make dotfiles
+green "Installing dotfiles"
+. "$DOTFILES_DIR/common/dotfiles.sh"
+ln -sfn "$DOTFILES_DIR/$DISTRO/.bash_local" ~/.bash_local

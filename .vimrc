@@ -14,7 +14,6 @@ call dein#begin(expand('~/.vim'))
   let pluginsExist = 0
   call dein#add('Shougo/dein.vim')
   call dein#add('airblade/vim-gitgutter')
-  call dein#add('mhartington/oceanic-next')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-unimpaired')
   call dein#add('scrooloose/syntastic')
@@ -23,16 +22,20 @@ call dein#begin(expand('~/.vim'))
   call dein#add('tmux-plugins/vim-tmux-focus-events')
   call dein#add('ujihisa/unite-colorscheme')
   call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
   call dein#add('vimwiki/vimwiki')
   call dein#add('scrooloose/nerdtree')
   call dein#add('Shougo/unite.vim')
   call dein#add('ngmy/vim-rubocop')
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
   call dein#add('Shougo/unite.vim')
-  call dein#add('itchyny/lightline.vim')
   call dein#add('junegunn/goyo.vim')
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+  call dein#add('rainglow/vim')
+  call dein#add('edkolev/tmuxline.vim')
+  call dein#add('rust-lang/rust.vim')
+  call dein#add('majutsushi/tagbar')
   if dein#check_install()
     call dein#install()
   endif
@@ -193,6 +196,7 @@ autocmd VimEnter * wincmd p
 
 " Show hidden files by default
 let NERDTreeShowHidden=1
+set laststatus=2
 
 " -----------------------------------------------------------------------------
 "   Syntastic
@@ -212,18 +216,18 @@ let g:syntastic_check_on_wq = 0
 set statusline+=%{fugitive#statusline()}
 
 " -----------------------------------------------------------------------------
-"   RuboCop
+"   Rust
 " -----------------------------------------------------------------------------
-let g:vimrubocop_keymap = 0
-nmap <Leader>r :RuboCop<CR>
+nmap <Leader>r :TagbarToggle<CR>
+autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
+autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 
 " -----------------------------------------------------------------------------
 "   Themes and colors
 " -----------------------------------------------------------------------------
 syntax enable
-set background=dark
-colorscheme OceanicNext
 set termguicolors
+colorscheme Tomorrow-Night
 set t_ut= " without this line, weird things happen when using tmux
 
 " vim-airline
@@ -232,7 +236,7 @@ set hidden
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='oceanicnext'
+let g:airline_theme='minimalist'
 
 " Colouring for greater than 80 chars
 highlight ColorColumn ctermbg=Red
@@ -241,7 +245,6 @@ call matchadd('ColorColumn', '\%81v', 100)
 " Highlight whitespace and tabs
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
-
 " -----------------------------------------------------------------------------
 "   Spelling
 " -----------------------------------------------------------------------------
