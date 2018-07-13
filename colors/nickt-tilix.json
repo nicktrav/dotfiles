@@ -1,0 +1,25 @@
+{
+  "name": "nickt",
+  "comment": "Ported from Tomorrow Night Burns",
+  "use-theme-colors": false,
+  "foreground-color": "#b0bec5",
+  "background-color": "#1b1b1b",
+  "palette": [
+    "#313131",
+    "#974040",
+    "#7cbf68",
+    "#dd6060",
+    "#ff7272",
+    "#e7a6a6",
+    "#c79898",
+    "#f7f7f7",
+    "#708284",
+    "#974040",
+    "#7cbf68",
+    "#dd6060",
+    "#ff7272",
+    "#e7a6a6",
+    "#c79898",
+    "#f7f7f7"
+  ]
+}
