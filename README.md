@@ -3,6 +3,5 @@
 To bootstrap, run the following:
 
 ```
-$ DISTRO=debian
-$ curl -L https://raw.githubusercontent.com/nicktrav/dotfiles/nickt.debian/bootstrap.sh | sh -s -- $DISTRO
+$ curl -L https://raw.githubusercontent.com/nicktrav/dotfiles/master/bootstrap.sh | sh -s --
 ```
