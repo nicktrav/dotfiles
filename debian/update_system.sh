@@ -10,11 +10,14 @@ green 'Installing dependencies ...'
 
 sudo apt-get update && sudo apt-get --yes upgrade
 sudo apt-get install --yes \
+  dnsutils \
   gcc \
   git \
+  host \
   htop \
   libxtst6 \
   make \
+  net-tools
   software-properties-common \
   tar \
   xserver-xephyr \
