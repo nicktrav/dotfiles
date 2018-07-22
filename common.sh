@@ -9,6 +9,7 @@ export DOTFILES_DIR=~/Development/dotfiles
 
 # Versions
 
+export GO_VERSION=1.10.3
 export JAVA_VERSION=10
 export RIPGREP_VERSION=0.8.1
 

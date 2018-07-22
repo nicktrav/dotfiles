@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Golang
+export PATH="$PATH:/usr/local/go/bin"
+
 # Java
 export JAVA_HOME="/var/lib/jdk-$JAVA_VERSION/"
 export PATH="$JAVA_HOME/bin:$PATH"
