@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-RED="\[\033[0;31m\]"
-YELLOW="\[\033[0;33m\]"
-GREEN="\[\033[0;32m\]"
-NO_COLOUR="\[\033[0m\]"
+# Colours
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NO_COLOUR='\033[0m'
 
 if [ -f "$HOME/.bash_local" ]; then
   # shellcheck source=/dev/null
@@ -124,6 +125,6 @@ function _last_status() {
   fi
 }
 
-_PS1="$YELLOW\u$NO_COLOUR:\w$(_git_prompt)"
+_PS1="$YELLOW\\u$NO_COLOUR:\\w$(_git_prompt)"
 export _PS1
 export PROMPT_COMMAND='export PS1="$(_last_status)${_PS1} $(_git_prompt)\n$ "'

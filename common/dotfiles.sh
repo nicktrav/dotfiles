@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090
 
 set -euo pipefail
 
@@ -7,21 +8,9 @@ source "$DIR/../common.sh"
 
 green 'Linking dotfiles'
 
-cd "$DOTFILES_DIR"
-
 mkdir -p "$HOME/bin"
-for file in $(find bin/ -type f -not -name ".*.swp");
-do
-  src=$(realpath $file)
-  dst="$HOME/bin/$(basename $file)"
-  sudo ln -sfn "$src" "$dst"
-done
+find "$DOTFILES_DIR/bin" -type f -not -name "*.swp" \
+  -exec bash -c 'ln -sfn $1 $HOME/bin/$(basename $1)' _ {} \;
 
-# add aliases for dotfiles
-FILES=$(find . -maxdepth 1 -name ".*" -not -name ".git" -not -name ".*.swp" -type f)
-for file in $FILES
-do
-  src=$(realpath $file)
-  dst="$HOME/$(basename $file)"
-  sudo ln -sfn "$src" "$dst"
-done
+find "$DOTFILES_DIR" -maxdepth 1 -type f -name ".*" -not -name ".git" -not -name "*.swp" \
+  -exec bash -c 'ln -sfn $1 $HOME/$(basename $1)' _ {} \;

@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
 
-set euo -pipefail
-
-export DIR="$( cd "$( dirname $(readlink "${BASH_SOURCE[0]}") )" >/dev/null && pwd )" 
-source "$DIR/../common.sh"
-
 # Java
 export JAVA_HOME="/var/lib/jdk-$JAVA_VERSION/"
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
-export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
+_sysroot=$(rustc --print sysroot)
+export RUST_SRC_PATH="$_sysroot/lib/rustlib/src/rust/src/"

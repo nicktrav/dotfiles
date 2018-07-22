@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090
 
 set -euo pipefail
 
@@ -15,7 +16,7 @@ green 'Installing tmux plugins'
 
 green "Installing vim colors"
 mkdir -p ~/.vim/colors
-cp $DOTFILES_DIR/colors/*.vim ~/.vim/colors/
+cp "$DOTFILES_DIR"/colors/*.vim ~/.vim/colors/
 
 green "Installing dotfiles"
 . "$DOTFILES_DIR/common/dotfiles.sh"

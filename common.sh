@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set euo -pipefail
+set -euo pipefail
 
 # Environment variables
 
@@ -15,9 +15,9 @@ export RIPGREP_VERSION=0.8.1
 # Functions
 
 function green() {
-  echo -e "\e[32m"$1"\e[39m"
+  printf '\e[32m%s\e[39m\n' "$1"
 }
 
 function magenta() {
-  echo -e "\e[35m"$1"\e[39m"
+  printf '\e[35m%s\e[39m\n' "$1"
 }
