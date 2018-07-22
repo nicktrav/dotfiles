@@ -10,6 +10,7 @@ export DOTFILES_DIR=~/Development/dotfiles
 # Versions
 
 export JAVA_VERSION=10
+export RIPGREP_VERSION=0.8.1
 
 # Functions
 
