@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090
 
 # Lint the shell scripts in .dotfiles
 # Inspiration taken from jessfraz/dotfiles
 
 set -eou pipefail
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source "$DIR/../common.sh"
 
 # Colours
 RED='\033[0;31m'
@@ -12,7 +16,7 @@ NC='\033[0m'
 
 # All files in this repo that aren't git files
 files=$(
-  find . -type f -not -iwholename '*git*' \
+  find "$DOTFILES_DIR" -type f -not -iwholename '*git*' \
     | sort -u
 )
 
@@ -23,7 +27,7 @@ FAILURES=()
 # Print the outcome of the linting. In the case that the file does not pass,
 # add the file to the list of failures.
 for file in $files; do
-  if file "$file" | grep --quiet 'bash script'; then
+  if file "$file" | grep --quiet 'shell script'; then
     echo -n "$file - "
     if shellcheck "$file" > /dev/null; then
       echo -e "${GREEN}PASS${NC}"
@@ -36,8 +40,8 @@ done
 
 count=${#FAILURES[@]}
 if [ "$count" -gt 0 ]; then
-  echo -e "\nFound $count files with issues!"
+  printf '\nFound %s files with issues!\n' "$count"
   exit 1
 else
-  echo -e "\nPass!"
+  printf '\nPass!\n'
 fi
