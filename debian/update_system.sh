@@ -10,6 +10,7 @@ green 'Installing dependencies ...'
 
 sudo apt-get update && sudo apt-get --yes upgrade
 sudo apt-get install --yes \
+  curl \
   dnsutils \
   gcc \
   git \
@@ -17,7 +18,7 @@ sudo apt-get install --yes \
   htop \
   libxtst6 \
   make \
-  net-tools
+  net-tools \
   software-properties-common \
   tar \
   xserver-xephyr \
