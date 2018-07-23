@@ -1,0 +1,9 @@
+FROM debian:stretch
+
+RUN apt-get update && apt-get install --yes sudo
+
+WORKDIR /root/Development/dotfiles
+
+ADD . /root/Development/dotfiles
+
+RUN ./install.sh debian
