@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  lint_bash:
+    docker:
+      - image: r.j3ss.co/shellcheck
+    working_directory: /root/Development/dotfiles
+    steps:
+      - checkout
+      - run:
+          command: ./ci/test.sh
+  build:
+    docker:
+      - image: docker:latest
+    working_directory: /source
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          command: docker build -f Dockerfile-debian .
+  publish:
+    docker:
+      - image: debian:stretch
+    working_directory: /source
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          command: ci/docker_push.sh
+workflows:
+  version: 2
+  test:
+    jobs:
+      - lint_bash
+      - build
+  publish:
+    jobs:
+      - publish
