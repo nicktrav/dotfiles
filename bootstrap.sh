@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Clones this repo into place and runs setup.sh
 
- [[ -z "${DISTRO}" ]] && BRANCH='chromeos'
- [[ -z "${BRANCH}" ]] && DISTRO='master'
+if [ -z "${DISTRO}" ]; then DISTRO='chromeos'; fi
+if [ -z "${BRANCH}" ]; then BRANCH='master'; fi
 
 mkdir -p ~/Development/dotfiles && \
   cd ~/Development/dotfiles && \
