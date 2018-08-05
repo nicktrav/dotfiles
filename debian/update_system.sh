@@ -12,6 +12,7 @@ sudo apt-get update && sudo apt-get --yes upgrade
 sudo apt-get install --yes \
   curl \
   dnsutils \
+  file \
   gcc \
   git \
   host \
