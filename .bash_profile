@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-#set -euo pipefail
+# shellcheck disable=SC1090
 
 # Source all dotfiles
 for file in ~/.{bash_prompt,aliases,functions,docker_functions,paths}; do
@@ -31,6 +30,10 @@ export BLOCKSIZE=1k
 # Do not store duplicate commands in bash history, as well commands that start
 # with a space
 export HISTCONTROL=ignoreboth
+
+
+# Fuzzy finder
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Supercharge fzf with ripgrep
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,.pants}/*"'
