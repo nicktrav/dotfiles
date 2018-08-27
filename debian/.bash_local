@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090
+
+source "$HOME/Development/dotfiles/common.sh"
 
 # Golang
 export PATH="$PATH:/usr/local/go/bin"
 
 # Java
-export JAVA_HOME="/var/lib/jdk-$JAVA_VERSION/"
+export JAVA_HOME="/var/lib/jdk-$JAVA_VERSION"
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # Rust
