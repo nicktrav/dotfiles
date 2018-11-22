@@ -4,16 +4,15 @@
 source "$HOME/Development/dotfiles/common.sh"
 
 # Golang
-export PATH="$PATH:/usr/local/go/bin"
+export GOPATH="$HOME/Development/go"
+export GOBIN="$GOPATH/bin"
 
 # Java
 export JAVA_HOME="/var/lib/jdk-$JAVA_VERSION"
-export PATH="$JAVA_HOME/bin:$PATH"
+export M2_HOME=/usr/local/src/maven
+export MAVEN_HOME="$M2_HOME"
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
 _sysroot=$(rustc --print sysroot)
 export RUST_SRC_PATH="$_sysroot/lib/rustlib/src/rust/src/"
-
-# Protoc
-export PATH="$PATH:/usr/local/src/protoc/bin"
