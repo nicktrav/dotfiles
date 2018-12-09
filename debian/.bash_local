@@ -6,6 +6,7 @@ source "$HOME/Development/dotfiles/common.sh"
 # Golang
 export GOPATH="$HOME/Development/go"
 export GOBIN="$GOPATH/bin"
+export PATH=$PATH:$GOBIN
 
 # Java
 export M2_HOME=/usr/local/src/maven
