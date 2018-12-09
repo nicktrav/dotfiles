@@ -44,4 +44,9 @@ if [ -f ~/.bash_local ]; then
   source ~/.bash_local
 fi
 
+# Jabba
+if [ -s "$HOME/.jabba/jabba.sh" ]; then
+  source "$HOME/.jabba/jabba.sh"
+fi
+
 export PATH=$HOME/bin:$PATH:$HOME
