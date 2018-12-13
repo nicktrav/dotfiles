@@ -13,7 +13,7 @@ green 'Installing tmux plugins'
 
 green "Installing vim colors"
 mkdir -p ~/.vim/colors
-find "$DOTFILES_DIR/colors" -maxdepth 1 -type f -name ".vim" \
+find "$DOTFILES_DIR/colors" -maxdepth 1 -type f -name "*.vim" \
   -exec bash -c 'ln -sfn $1 $HOME/.vim/colors/$(basename $1)' _ {} \;
 
 green "Installing dotfiles"
