@@ -5,6 +5,7 @@ source "$HOME/Development/dotfiles/common.sh"
 
 # Golang
 export GOPATH="$HOME/Development/go"
+export GOROOT="$GOPATH"
 export GOBIN="$GOPATH/bin"
 
 # Java
