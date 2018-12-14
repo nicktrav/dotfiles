@@ -36,6 +36,8 @@ call dein#begin(expand('~/.vim'))
   call dein#add('edkolev/tmuxline.vim')
   call dein#add('rust-lang/rust.vim')
   call dein#add('majutsushi/tagbar')
+  call dein#add('terryma/vim-multiple-cursors')
+  call dein#add('tpope/vim-surround')
   if dein#check_install()
     call dein#install()
   endif
