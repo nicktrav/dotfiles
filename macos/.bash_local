@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Prefer gutils over regular utils
+export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/make/libexec/gnuman:$MANPATH"
