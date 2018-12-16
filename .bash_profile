@@ -60,7 +60,7 @@ fi
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
-if hash rustc 2>&1 /dev/null; then
+if hash "rustc" &> /dev/null; then
   _sysroot=$(rustc --print sysroot)
   export RUST_SRC_PATH="$_sysroot/lib/rustlib/src/rust/src/"
 fi
