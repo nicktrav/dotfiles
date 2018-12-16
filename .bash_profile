@@ -31,7 +31,6 @@ export BLOCKSIZE=1k
 # with a space
 export HISTCONTROL=ignoreboth
 
-
 # Fuzzy finder
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -44,9 +43,24 @@ if [ -f ~/.bash_local ]; then
   source ~/.bash_local
 fi
 
-# Jabba
+# Add utility scripts to path
+export PATH=$HOME/bin:$PATH
+
+# Golang
+export GOPATH="$HOME/Development/go"
+export GOBIN="$GOPATH/bin"
+export PATH="$GOBIN:$PATH"
+
+# Java
+export M2_HOME=/usr/local/src/maven
+export MAVEN_HOME="$M2_HOME"
 if [ -s "$HOME/.jabba/jabba.sh" ]; then
   source "$HOME/.jabba/jabba.sh"
 fi
 
-export PATH=$HOME/bin:$PATH:$HOME
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+if hash rustc 2>&1 /dev/null; then
+  _sysroot=$(rustc --print sysroot)
+  export RUST_SRC_PATH="$_sysroot/lib/rustlib/src/rust/src/"
+fi

@@ -4,7 +4,11 @@ alias dev='cd ~/Development/; ls -l;'
 alias cp='cp -iv'                           # Preferred 'cp' implementation
 alias mv='mv -iv'                           # Preferred 'mv' implementation
 alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
-alias ls='ls -FGlhp --color'                # Preferred 'ls' implementation
+if [[ $(uname) == 'Darwin' ]]; then
+  alias ls='ls -FGlhp'                      # Preferred 'ls' implementation
+else
+  alias ls='ls -FGlhp --color'              # Preferred 'ls' implementation
+fi
 alias ll='ls -l'
 alias lla='ls -la'
 alias less='less -FSRXc'                    # Preferred 'less' implementation
