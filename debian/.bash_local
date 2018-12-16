@@ -1,18 +1,2 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090
-
-source "$HOME/Development/dotfiles/common.sh"
-
-# Golang
-export GOPATH="$HOME/Development/go"
-export GOBIN="$GOPATH/bin"
-export PATH=$PATH:$GOBIN
-
-# Java
-export M2_HOME=/usr/local/src/maven
-export MAVEN_HOME="$M2_HOME"
-
-# Rust
-export PATH="$HOME/.cargo/bin:$PATH"
-_sysroot=$(rustc --print sysroot)
-export RUST_SRC_PATH="$_sysroot/lib/rustlib/src/rust/src/"
