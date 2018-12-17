@@ -25,3 +25,6 @@ find "$DOTFILES_DIR/bin" -type f -not -name "*.swp" \
   -exec bash -c 'ln -sfn $1 $HOME/bin/$(basename $1)' _ {} \;
 
 ln -sfn "$DOTFILES_DIR/$DISTRO/.bash_local" ~/.bash_local
+
+green "Linking Alacritty dotfiles"
+. "$DIR/alacritty/install.sh"
