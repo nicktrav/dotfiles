@@ -40,7 +40,7 @@ function _git_prompt() {
   local git_status
   git_status=$(git status -unormal 2>&1)
   # Checks to see if we're in a git repo
-  if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
+  if ! [[ "$git_status" =~ not\ a\ git\ repo ]]; then
     # if we're in a repo thats clean, then color it green
     if [[ "$git_status" =~ nothing\ to\ commit ]]; then
       local ansi=$GREEN
