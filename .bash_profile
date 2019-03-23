@@ -37,7 +37,14 @@ export HISTCONTROL=ignoreboth
 # Supercharge fzf with ripgrep
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,.pants}/*"'
 
+# OS specific configuration
+if [ -f ~/.bash_os_specific ]; then
+  # shellcheck source=/dev/null
+  source ~/.bash_os_specific
+fi
+
 # Local customized path and environment settings, etc.
+# This file isn't checked in, and should be provided instead.
 if [ -f ~/.bash_local ]; then
   # shellcheck source=/dev/null
   source ~/.bash_local
