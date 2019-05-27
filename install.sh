@@ -26,5 +26,7 @@ find "$DOTFILES_DIR/bin" -type f -not -name "*.swp" \
 
 ln -sfn "$DOTFILES_DIR/$DISTRO/.bash_os_specific" ~/.bash_os_specific
 
+ln -sfn "$DOTFILES_DIR/.paths" ~/.paths
+
 green "Linking Alacritty dotfiles"
 . "$DIR/alacritty/install.sh"
