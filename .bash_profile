@@ -50,6 +50,12 @@ if [ -f ~/.bash_local ]; then
   source ~/.bash_local
 fi
 
+# Paths that specific tools set (e.g. GCP)
+if [ -f ~/.paths ]; then
+  # shellcheck source=/dev/null
+  source ~/.paths
+fi
+
 # Add utility scripts to path
 export PATH=$HOME/bin:$PATH
 
