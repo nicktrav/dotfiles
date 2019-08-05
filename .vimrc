@@ -200,6 +200,9 @@ autocmd VimEnter * wincmd p
 let NERDTreeShowHidden=1
 set laststatus=2
 
+" Ignore certain file types
+let NERDTreeIgnore = ['\.swp$', '\.swo$']
+
 " -----------------------------------------------------------------------------
 "   Syntastic
 " -----------------------------------------------------------------------------
