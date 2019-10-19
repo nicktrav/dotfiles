@@ -125,6 +125,23 @@ function _last_status() {
   fi
 }
 
+function _kube_cluster() {
+  if [ ! -f ~/.kube/config ]; then
+    return
+  fi
+
+  _cluster=$(
+    grep -m 1 "current-context:" ~/.kube/config \
+      | sed "s/current-context: //"
+  )
+
+  if [[ $_cluster =~ "staging" ]]; then
+    printf "\\n%s%s%s" "$GREEN" "$_cluster" "$NO_COLOUR"
+  else
+    printf "\\n%s%s%s" "$RED" "$_cluster" "$NO_COLOUR"
+  fi
+}
+
 _PS1="$YELLOW\\u$NO_COLOUR:\\w$(_git_prompt)"
 export _PS1
-export PROMPT_COMMAND='export PS1="$(_last_status)${_PS1} $(_git_prompt)\n$ "'
+export PROMPT_COMMAND='export PS1="$(_last_status)${_PS1} $(_git_prompt)$(_kube_cluster)\n$ "'
