@@ -228,6 +228,12 @@ autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.
 autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 
 " -----------------------------------------------------------------------------
+"   Deps
+" -----------------------------------------------------------------------------
+" Color .dep files like python files
+autocmd BufRead,BufNewFile *.dep set syntax=python
+
+" -----------------------------------------------------------------------------
 "   Themes and colors
 " -----------------------------------------------------------------------------
 syntax enable
