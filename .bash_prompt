@@ -14,26 +14,22 @@ fi
 # If we're in a large git repo, short circuit. Set the NO_GIT_PROMP
 # variable in .bash_local.
 function _should_ignore {
-  local in
-  in=0
-
   if [ -z "$NO_GIT_PROMPT" ]; then
-    echo "$in"
+    echo 0
     return
   fi
 
   for element in "${NO_GIT_PROMPT[@]}"; do
     if [[ "$element" == "$(pwd)" ]]; then
-      in=1
-      break
+      echo 1
+      return
     fi
   done
-
-  echo $in
 }
 
 function _git_prompt() {
-  if [ "$(_should_ignore)" == "1" ]; then echo
+  if [[ $(_should_ignore) -eq 1 ]]; then
+    echo -n "| [${YELLOW}Big repo - Git prompt disabled${NO_COLOUR}]"
     return
   fi
 
