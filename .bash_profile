@@ -77,3 +77,9 @@ if hash "rustc" &> /dev/null; then
   _sysroot=$(rustc --print sysroot)
   export RUST_SRC_PATH="$_sysroot/lib/rustlib/src/rust/src/"
 fi
+
+# Nix
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+  # shellcheck disable=SC1091
+  source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+fi

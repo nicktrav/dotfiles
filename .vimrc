@@ -38,6 +38,7 @@ call dein#begin(expand('~/.vim'))
   call dein#add('majutsushi/tagbar')
   call dein#add('terryma/vim-multiple-cursors')
   call dein#add('tpope/vim-surround')
+  call dein#add('LnL7/vim-nix')
   if dein#check_install()
     call dein#install()
   endif
