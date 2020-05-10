@@ -67,9 +67,6 @@ export PATH="$GOBIN:$PATH"
 # Java
 export M2_HOME=/usr/local/src/maven
 export MAVEN_HOME="$M2_HOME"
-if [ -s "$HOME/.jabba/jabba.sh" ]; then
-  source "$HOME/.jabba/jabba.sh"
-fi
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
