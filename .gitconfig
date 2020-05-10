@@ -72,3 +72,6 @@
 [gc]
   auto = 50000
   autopacklimit = 500
+
+[http]
+  sslcainfo = ~/.nix-profile/etc/ssl/certs/ca-bundle.crt
