@@ -3,3 +3,29 @@
 # Prefer gutils over regular utils
 export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/make/libexec/gnuman:$MANPATH"
+
+# This is gross. macOS likes to always spin up its own ssh-agent no matter how
+# many times you try and kill it. Instead, spin up our own, with a socket that
+# we control. Override the environemnt variable to ensure that any ssh commands
+# will use the daemon listening on this socket.
+_pkcs11_path=$(readlink ~/.nix-profile/lib/opensc-pkcs11.so)
+function restart-ssh-agent() {
+  pkill ssh-agent
+  eval "ssh-agent -a $SSH_AUTH_SOCK -P $_pkcs11_path" > /dev/null
+
+  echo "Re-adding SSH key. Enter the passphrase for the Yubikey."
+  yk-ssh-add
+}
+
+function yk-ssh-add() {
+  ssh-add -s "$_pkcs11_path"
+}
+
+function yk-ssh-show-pubkeys() {
+  ssh-keygen -D "$_pkcs11_path"
+}
+
+SSH_AUTH_SOCK=~/.ssh/yubikey-ssh.sock
+if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
+  restart-ssh-agent
+fi
