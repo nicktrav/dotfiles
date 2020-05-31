@@ -75,8 +75,25 @@ if hash "rustc" &> /dev/null; then
   export RUST_SRC_PATH="$_sysroot/lib/rustlib/src/rust/src/"
 fi
 
-# Nix
-if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-  # shellcheck disable=SC1091
-  source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+# SSH with a Yubikey
+export SSH_AUTH_SOCK=~/.ssh/yubikey-ssh.sock
+_pkcs11_path=$(readlink -f ~/.nix-profile/lib/opensc-pkcs11.so)
+function restart-ssh-agent() {
+  pkill ssh-agent
+  eval "ssh-agent -a $SSH_AUTH_SOCK -P $_pkcs11_path" > /dev/null
+
+  echo "Re-adding SSH key. Enter the passphrase for the Yubikey."
+  yk-ssh-add
+}
+
+function yk-ssh-add() {
+  ssh-add -s "$_pkcs11_path"
+}
+
+function yk-ssh-show-pubkeys() {
+  ssh-keygen -D "$_pkcs11_path"
+}
+
+if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
+  restart-ssh-agent
 fi
