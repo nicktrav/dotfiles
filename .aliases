@@ -32,14 +32,20 @@ alias fix_stty='stty sane'                  # fix_stty:     Restore terminal set
 alias cic='set completion-ignore-case On'   # cic:          Make tab-completion case-insensitive
 alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
 alias gl='git -p log -w --stat --no-merges' # Print a pretty git log
+alias glo='git log --no-merges --oneline'
 alias glg='git -p log --graph'
 alias macdown='open /Applications/MacDown.app'
 alias gpom='git pull origin master'
 alias gs='git status'
 alias gd='git diff'
+alias gcm='git checkout master'
 
 # lr:  Full Recursive Directory Listing
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
 
 # Lock the screen
 alias afk='pmset displaysleepnow'
+
+# Clipboard
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'

@@ -77,6 +77,7 @@ font:
   # Normal (roman) font face
   normal:
     family: "Inconsolata-dz for Powerline"
+    #family: "Inconsolata"
 
   # Bold font face
   #bold:
@@ -91,7 +92,7 @@ font:
   #  #style: Italic
 
   # Point size
-  size: 12.0
+  size: 10.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -257,7 +258,7 @@ mouse:
     #
     # This program is executed when clicking on a text which is recognized as a URL.
     # The URL is always added to the command as the last parameter.
-    launcher: open
+    launcher: chromium
 
     # URL modifiers
     #
@@ -402,6 +403,9 @@ key_bindings:
   - { key: Tab,      mods: Shift,   chars: "\x1b[Z"                      }
   - { key: Back,                    chars: "\x7f"                        }
   - { key: Back,     mods: Alt,     chars: "\x1b\x7f"                    }
+  # Prevent Alacritty from sending ^H on ctrl-backspace, which triggers a pane
+  # shift in my tmux config. Simply disable this combination.
+  - { key: Back,     mods: Control, action: None                         }
   - { key: Insert,                  chars: "\x1b[2~"                     }
   - { key: Delete,                  chars: "\x1b[3~"                     }
   - { key: Left,     mods: Shift,   chars: "\x1b[1;2D"                   }

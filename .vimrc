@@ -65,6 +65,13 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+" Copy / paste
+set clipboard=unnamedplus
+"noremap <Leader>y "*y
+"noremap <Leader>p "*p
+"noremap y "+y
+"noremap p "+p
+
 " Close a buffer by first switching to the next buffer and then closing out
 " the buffer from which we came
 nnoremap c :bp\|bd #<CR>

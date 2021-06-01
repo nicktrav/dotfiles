@@ -67,6 +67,8 @@ export PATH="$GOBIN:$PATH"
 # Java
 export M2_HOME=/usr/local/src/maven
 export MAVEN_HOME="$M2_HOME"
+JAVA_HOME=$(readlink -e "$(type -p javac)" | sed  -e 's/\/bin\/javac//g')
+export JAVA_HOME
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -80,3 +82,28 @@ if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   # shellcheck disable=SC1091
   source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
+
+# SSH with a Yubikey
+export SSH_AUTH_SOCK=~/.ssh/yubikey-ssh.sock
+_pkcs11_path=$(readlink -f ~/.nix-profile/lib/opensc-pkcs11.so)
+function restart-ssh-agent() {
+  pkill ssh-agent
+  eval "ssh-agent -a $SSH_AUTH_SOCK -P $_pkcs11_path" > /dev/null
+
+  echo "Re-adding SSH key. Enter the passphrase for the Yubikey."
+  yk-ssh-add
+}
+
+function yk-ssh-add() {
+  ssh-add -s "$_pkcs11_path"
+}
+
+function yk-ssh-show-pubkeys() {
+  ssh-keygen -D "$_pkcs11_path"
+}
+
+if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
+  restart-ssh-agent
+fi
+
+unset command_not_found_handle
